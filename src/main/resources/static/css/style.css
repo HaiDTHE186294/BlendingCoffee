@@ -1,0 +1,462 @@
+:root {
+    /* HSL Colors */
+    --primary: 25 80% 50%;
+    /* Coffee Orange/Brown */
+    --primary-hover: 25 80% 40%;
+    --bg-dark: 240 10% 8%;
+    /* Very Dark Grey/Blue */
+    --panel-bg: 240 10% 12%;
+    /* Slightly lighter */
+    --text-main: 0 0% 95%;
+    --text-muted: 240 5% 60%;
+    --border: 240 10% 20%;
+    --accent-green: 150 60% 40%;
+    --accent-red: 0 60% 50%;
+
+    /* Layout */
+    --radius: 12px;
+    --spacing: 1.5rem;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: hsl(var(--bg-dark));
+    color: hsl(var(--text-main));
+    height: 100vh;
+    overflow: hidden;
+    /* App-like feel */
+}
+
+/* App Layout */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+header {
+    height: 60px;
+    padding: 0 var(--spacing);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid hsl(var(--border));
+    background: hsla(var(--panel-bg), 0.8);
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.highlight {
+    color: hsl(var(--primary));
+}
+
+#market-status {
+    font-size: 0.9rem;
+    color: hsl(var(--text-muted));
+    font-family: monospace;
+}
+
+main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    /* Increased width for config panel */
+    gap: var(--spacing);
+    padding: var(--spacing);
+    overflow: hidden;
+    gap: var(--spacing);
+    padding: var(--spacing);
+    overflow: hidden;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid hsl(var(--border));
+    padding-bottom: 10px;
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    color: hsl(var(--text-muted));
+    font-weight: 600;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.tab-btn:hover {
+    color: hsl(var(--text-main));
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.tab-btn.active {
+    color: hsl(var(--primary));
+    background: hsla(var(--primary), 0.1);
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Glass Panel Styling */
+.glass-panel {
+    background: hsla(var(--panel-bg), 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    padding: var(--spacing);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+    font-size: 1.1rem;
+    color: hsl(var(--primary));
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+}
+
+/* Input Forms */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+label {
+    font-size: 0.8rem;
+    color: hsl(var(--text-muted));
+}
+
+input,
+select {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid hsl(var(--border));
+    color: white;
+    padding: 8px;
+    border-radius: 6px;
+    font-family: inherit;
+    transition: all 0.2s;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 2px hsla(var(--primary), 0.2);
+}
+
+/* Batch List */
+.batch-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.batch-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px;
+    border-radius: 8px;
+    border-left: 3px solid hsl(var(--border));
+    position: relative;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.batch-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.batch-card.active {
+    border-left-color: hsl(var(--primary));
+}
+
+.batch-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.batch-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 0.8rem;
+    color: hsl(var(--text-muted));
+    gap: 5px;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    color: hsl(var(--accent-red));
+    cursor: pointer;
+    font-size: 0.8rem;
+    opacity: 0.5;
+}
+
+.delete-btn:hover {
+    opacity: 1;
+}
+
+.separator {
+    height: 1px;
+    background: hsl(var(--border));
+    margin: 1.5rem 0;
+}
+
+/* Buttons */
+button {
+    cursor: pointer;
+    font-family: inherit;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.primary-btn {
+    background: hsl(var(--primary));
+    color: white;
+    border: none;
+    padding: 12px;
+    font-weight: 600;
+    width: 100%;
+    margin-top: auto;
+}
+
+.primary-btn:hover {
+    background: hsl(var(--primary-hover));
+    transform: translateY(-1px);
+}
+
+.secondary-btn {
+    background: transparent;
+    border: 1px dashed hsl(var(--border));
+    color: hsl(var(--text-muted));
+    padding: 8px;
+    width: 100%;
+}
+
+.secondary-btn:hover {
+    border-color: hsl(var(--primary));
+    color: hsl(var(--primary));
+}
+
+/* Results Area */
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 2rem;
+}
+
+.metric-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.metric-card .label {
+    display: block;
+    font-size: 0.8rem;
+    color: hsl(var(--text-muted));
+    margin-bottom: 5px;
+}
+
+.metric-card .value {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: hsl(var(--primary));
+}
+
+.metric-card .sub {
+    font-size: 0.8rem;
+    display: block;
+}
+
+.sub.good {
+    color: hsl(var(--accent-green));
+}
+
+.sub.bad {
+    color: hsl(var(--accent-red));
+}
+
+.charts-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 2rem;
+    min-height: 300px;
+}
+
+.chart-wrapper {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+canvas {
+    flex: 1;
+}
+
+.recipe-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.recipe-table th {
+    text-align: left;
+    color: hsl(var(--text-muted));
+    padding: 8px;
+    border-bottom: 1px solid hsl(var(--border));
+}
+
+.recipe-table td {
+    padding: 8px;
+    border-bottom: 1px solid hsla(var(--border), 0.3);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    width: 500px;
+    max-width: 90%;
+    background: hsl(var(--panel-bg));
+    border: 1px solid hsl(var(--border));
+    padding: var(--spacing);
+    border-radius: var(--radius);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.close-modal,
+.close-modal-compare {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: hsl(var(--text-muted));
+    cursor: pointer;
+}
+
+.modal-footer {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 4px;
+}
+
+/* Alerts */
+.alert-box {
+    background: hsla(35, 80%, 20%, 0.5);
+    border: 1px solid hsl(var(--primary));
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.alert-box strong {
+    color: hsl(var(--primary));
+    display: block;
+    margin-bottom: 5px;
+}
+
+.alert-box p {
+    color: hsl(var(--text-main));
+    white-space: pre-line;
+    /* Handle newlines from trace */
+}
